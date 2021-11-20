@@ -12,6 +12,8 @@ public class IntMatrix {
     boolean isEmpty = true;
 
     public IntMatrix(int[][] initMatrix) {
+        if (!hasEqualRowLengths(initMatrix))
+            throw new IllegalArgumentException("Parameter does not have rows of equal length.");
         isEmpty = false;
         matrixElements = new ArrayList<>();
         for (int r = 0; r < initMatrix.length; ++r) {
@@ -20,6 +22,15 @@ public class IntMatrix {
                 matrixElements.get(r).add(c, initMatrix[r][c]);
             }
         }
+    }
+
+    private boolean hasEqualRowLengths(int[][] arr) {
+        int l = arr[0].length;
+        for (int i = 1; i < arr.length; ++i) {
+            if (arr[i].length != l)
+                return false;
+        }
+        return true;
     }
 
     public IntMatrix() {

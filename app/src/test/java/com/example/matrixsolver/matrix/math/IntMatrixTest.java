@@ -21,12 +21,17 @@ public class IntMatrixTest {
     }
 
     @Test
+    public void throwsNPEWhenInitializedWithNull() {
+        assertThrows(NullPointerException.class, () -> new IntMatrix(null));
+    }
+
+    @Test
     public void throwExceptionWhenGettingNonExistentElement() {
         assertThrows(IntMatrix.NoSuchElementException.class, () -> matrix.getElement(0, 0));
     }
 
     @Test
-    public void isNotEmptyWhenIntitializingWithOneElement() {
+    public void isNotEmptyWhenInitializingWithOneElement() {
         IntMatrix matrix = new IntMatrix(new int[][] {{1}});
         assertFalse(matrix.isEmpty());
     }
@@ -45,5 +50,14 @@ public class IntMatrixTest {
         for (int i = 0; i < row.length; ++i) {
             assertEquals(row[i], matrix.getElement(0, i));
         }
+    }
+
+    @Test
+    public void throwsIllegelArgExceptionWhenDoubleArrRowsAreDifferentLength() {
+        int[][] arr = new int[][] {
+                {1, 2, 3},
+                {1, 2}
+        };
+        assertThrows(IllegalArgumentException.class, () -> new IntMatrix(arr));
     }
 }
