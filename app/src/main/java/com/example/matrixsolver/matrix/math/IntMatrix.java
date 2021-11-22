@@ -7,30 +7,34 @@ import javax.crypto.ExemptionMechanismException;
 
 public class IntMatrix {
 
-    List<List<Integer>> matrixElements;
+    List<List<Integer>> matrixElements = new ArrayList<>();
 
     boolean isEmpty = true;
 
     public IntMatrix(int[][] initMatrix) {
-        if (!hasEqualRowLengths(initMatrix))
-            throw new IllegalArgumentException("Parameter does not have rows of equal length.");
+        int maxWidth = getLengthOfLargestRow(initMatrix);
+        int maxHeight = initMatrix.length;
         isEmpty = false;
-        matrixElements = new ArrayList<>();
-        for (int r = 0; r < initMatrix.length; ++r) {
+        for (int r = 0; r < maxHeight; ++r) {
             matrixElements.add(r, new ArrayList<>());
-            for (int c = 0; c < initMatrix[r].length; ++c) {
+            int c = 0;
+            for (; c < initMatrix[r].length; ++c) {
                 matrixElements.get(r).add(c, initMatrix[r][c]);
+            }
+            for (; c < maxWidth; ++c) {
+                matrixElements.get(r).add(c, 0);
             }
         }
     }
 
-    private boolean hasEqualRowLengths(int[][] arr) {
-        int l = arr[0].length;
-        for (int i = 1; i < arr.length; ++i) {
-            if (arr[i].length != l)
-                return false;
+    private int getLengthOfLargestRow(int[][] darr) {
+        int lengthOfLargestRow = 0;
+        for (int r = 0; r < darr.length; ++r) {
+            if (darr[r].length > lengthOfLargestRow) {
+                lengthOfLargestRow = darr[r].length;
+            }
         }
-        return true;
+        return lengthOfLargestRow;
     }
 
     public IntMatrix() {
@@ -46,7 +50,7 @@ public class IntMatrix {
     }
 
     public int getElement(int row, int col) {
-        if (isEmpty) {
+        if (matrixElements.size() <= row || matrixElements.get(row).size() <= col) {
             throw new NoSuchElementException();
         }
         return matrixElements.get(row).get(col);

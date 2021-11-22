@@ -53,11 +53,13 @@ public class IntMatrixTest {
     }
 
     @Test
-    public void throwsIllegelArgExceptionWhenDoubleArrRowsAreDifferentLength() {
-        int[][] arr = new int[][] {
+    public void autoExpandsWhenPassedUnevenDoubleArray() {
+        int[][] unevenArray = new int[][] {
                 {1, 2, 3},
-                {1, 2}
+                {4, 5},
+                {-16}
         };
-        assertThrows(IllegalArgumentException.class, () -> new IntMatrix(arr));
+        IntMatrix matrix = new IntMatrix(unevenArray);
+        assertEquals(0, matrix.getElement(1, 2));
     }
 }
