@@ -10,9 +10,10 @@ public class IntMatrix {
     List<List<Integer>> matrixElements = new ArrayList<>();
 
     boolean isEmpty = true;
+    int width = 0;
 
     public IntMatrix(int[][] initMatrix) {
-        int maxWidth = getLengthOfLargestRow(initMatrix);
+        width = getLengthOfLargestRow(initMatrix);
         int maxHeight = initMatrix.length;
         isEmpty = false;
         for (int r = 0; r < maxHeight; ++r) {
@@ -21,7 +22,7 @@ public class IntMatrix {
             for (; c < initMatrix[r].length; ++c) {
                 matrixElements.get(r).add(c, initMatrix[r][c]);
             }
-            for (; c < maxWidth; ++c) {
+            for (; c < width; ++c) {
                 matrixElements.get(r).add(c, 0);
             }
         }
@@ -39,6 +40,14 @@ public class IntMatrix {
 
     public IntMatrix() {
 
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return matrixElements.size();
     }
 
     public class NoSuchElementException extends RuntimeException {

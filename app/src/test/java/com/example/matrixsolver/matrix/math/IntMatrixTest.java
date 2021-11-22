@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.function.ThrowingRunnable;
 
 public class IntMatrixTest {
 
@@ -18,6 +17,33 @@ public class IntMatrixTest {
     @Test
     public void isEmptyOnCreation() {
         assertTrue(matrix.isEmpty());
+    }
+
+    @Test
+    public void hasNoWidthAndHeightOnEmptyCreation() {
+        assertEquals(0, matrix.getWidth());
+        assertEquals(0, matrix.getHeight());
+    }
+
+    @Test
+    public void hasWidthAndHeightOnNonEmptyInitialization() {
+        int[][] arr = new int[][] {
+                {1},
+                {1, 2}
+        };
+        IntMatrix m = new IntMatrix(arr);
+        assertEquals(arr.length, m.getHeight());
+        assertEquals(getWidthOfLargestRowInDoubleArray(arr), m.getWidth());
+    }
+
+    private int getWidthOfLargestRowInDoubleArray(int[][] arr) {
+        int largestWidth = 0;
+        for (int r = 0; r < arr.length; ++r) {
+            if (arr[r].length > largestWidth) {
+                largestWidth = arr[r].length;
+            }
+        }
+        return largestWidth;
     }
 
     @Test
@@ -62,4 +88,6 @@ public class IntMatrixTest {
         IntMatrix matrix = new IntMatrix(unevenArray);
         assertEquals(0, matrix.getElement(1, 2));
     }
+
+
 }
