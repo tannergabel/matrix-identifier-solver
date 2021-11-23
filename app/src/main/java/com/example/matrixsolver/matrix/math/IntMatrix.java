@@ -28,6 +28,7 @@ public class IntMatrix {
      * Initializes an n x m zero matrix.
      * @param n Number of rows.
      * @param m Number of columns.
+     * @throws IllegalArgumentException Indicates that a given argument is < 0.
      */
     public IntMatrix(int n, int m) {
 
@@ -95,6 +96,7 @@ public class IntMatrix {
      * @param row Row to be inserted into the matrix.
      * @param index Index to insert the row.
      * @throws ArrayIndexOutOfBoundsException Indicates an invalid index.
+     * @throws NullPointerException Indicates row argument is null.
      */
     public void putRow(int[] row, int index) {
 
@@ -105,8 +107,24 @@ public class IntMatrix {
      * @param column Column to be inserted into the matrix.
      * @param index Index to insert the column.
      * @throws ArrayIndexOutOfBoundsException Indicates an invalid index.
+     * @throws NullPointerException Indicates column argument is null.
      */
     public void putColumn(int[] column, int index) {
 
+    }
+
+    /**
+     * @param r1 Indicates the row of the submatrix's starting element.
+     * @param c1 Indicates the column of the submatrix's starting element.
+     * @param r2 Indicates the row of the submatrix's ending element.
+     * @param c2 Indicates the column of the submatrix's ending element.
+     * @return A submatrix whose element at (0,0) is the element from this matrix at
+     * (r1,c1) and whose bottom-right-most element is the element from this matrix at
+     * (r2,c2)
+     * @throws ArrayIndexOutOfBoundsException Indicates one of the given parameters exceeds
+     * the size of the matrix or is < 0.
+     */
+    public int[][] getSubmatrix(int r1, int c1, int r2, int c2) {
+        return null;
     }
 }
