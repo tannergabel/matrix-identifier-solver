@@ -7,61 +7,106 @@ import javax.crypto.ExemptionMechanismException;
 
 public class IntMatrix {
 
-    List<List<Integer>> matrixElements = new ArrayList<>();
-
-    boolean isEmpty = true;
-    int width = 0;
-
-    public IntMatrix(int[][] initMatrix) {
-        width = getLengthOfLargestRow(initMatrix);
-        int maxHeight = initMatrix.length;
-        isEmpty = false;
-        for (int r = 0; r < maxHeight; ++r) {
-            matrixElements.add(r, new ArrayList<>());
-            int c = 0;
-            for (; c < initMatrix[r].length; ++c) {
-                matrixElements.get(r).add(c, initMatrix[r][c]);
-            }
-            for (; c < width; ++c) {
-                matrixElements.get(r).add(c, 0);
-            }
-        }
-    }
-
-    private int getLengthOfLargestRow(int[][] darr) {
-        int lengthOfLargestRow = 0;
-        for (int r = 0; r < darr.length; ++r) {
-            if (darr[r].length > lengthOfLargestRow) {
-                lengthOfLargestRow = darr[r].length;
-            }
-        }
-        return lengthOfLargestRow;
-    }
-
+    /**
+     * Initializes an empty matrix.
+     */
     public IntMatrix() {
 
     }
 
+    /**
+     * Initializes a matrix with the given 2d array. Uneven rows / columns will be evened out with
+     * zeros.
+     * @param initialMatrix 2D array which will have its values put into the matrix.
+     * @throws NullPointerException Indicates that the given parameter is null.
+     */
+    public IntMatrix(int[][] initialMatrix) {
+
+    }
+
+    /**
+     * Initializes an n x m zero matrix.
+     * @param n Number of rows.
+     * @param m Number of columns.
+     */
+    public IntMatrix(int n, int m) {
+
+    }
+
+    /**
+     * Returns the value at position (row, col).
+     *
+     * @param row Specifies the row number of the target element.
+     * @param col Specifies the column number of the target element.
+     * @return The value stored at the given position.
+     * @throws ArrayIndexOutOfBoundsException Indicates that no element exists at the
+     *                                        specified location.
+     */
+    public int get(int row, int col) {
+        return 0;
+    }
+
+    /**
+     * Inserts a value at (row, col). The matrix will be expanded and padded with zeros
+     * to fit the new element at the given position.
+     * @param newElement New value to be inserted into matrix.
+     * @param row Specifies the row to place the element.
+     * @param col Specifies the column to place the element.
+     * @throws IllegalArgumentException Indicates that either row or col < 0.
+     */
+    public void put(int newElement, int row, int col) {
+
+    }
+
+    /**
+     * @return The number of columns.
+     */
     public int getWidth() {
-        return width;
+        return 0;
     }
 
+    /**
+     * @return The number of rows.
+     */
     public int getHeight() {
-        return matrixElements.size();
+        return 0;
     }
 
-    public class NoSuchElementException extends RuntimeException {
+    /**
+     * @param index Specifies which row to return.
+     * @return The row located at index.
+     * @throws ArrayIndexOutOfBoundsException Indicates a row does not exist at the given index.
+     */
+    public int[] getRow(int index) {
+        return null;
+    }
+
+    /**
+     * @param index Specifies which column to return.
+     * @return The column located at index.
+     * @throws ArrayIndexOutOfBoundsException Indicates a column does not exist at the given index.
+     */
+    public int[] getColumn(int index) {
+        return null;
+    }
+
+    /**
+     * Inserts a row at a given index.
+     * @param row Row to be inserted into the matrix.
+     * @param index Index to insert the row.
+     * @throws ArrayIndexOutOfBoundsException Indicates an invalid index.
+     */
+    public void putRow(int[] row, int index) {
 
     }
 
-    public boolean isEmpty() {
-        return isEmpty;
-    }
+    /**
+     * Inserts a column at a given index.
+     * @param column Column to be inserted into the matrix.
+     * @param index Index to insert the column.
+     * @throws ArrayIndexOutOfBoundsException Indicates an invalid index.
+     */
+    public void putColumn(int[] column, int index) {
 
-    public int getElement(int row, int col) {
-        if (matrixElements.size() <= row || matrixElements.get(row).size() <= col) {
-            throw new NoSuchElementException();
-        }
-        return matrixElements.get(row).get(col);
     }
 }
