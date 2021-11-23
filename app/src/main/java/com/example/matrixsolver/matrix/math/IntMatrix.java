@@ -7,6 +7,10 @@ import javax.crypto.ExemptionMechanismException;
 
 public class IntMatrix {
 
+    /*
+     * https://en.wikipedia.org/wiki/Matrix_(mathematics)
+     */
+
     /**
      * Initializes an empty matrix.
      */
@@ -44,7 +48,14 @@ public class IntMatrix {
      *                                        specified location.
      */
     public int get(int row, int col) {
-        return 0;
+        throw new ArrayIndexOutOfBoundsException();
+    }
+
+    /**
+     * @return The entire matrix.
+     */
+    public int[][] getMatrix() {
+        return new int[0][0];
     }
 
     /**
@@ -74,12 +85,19 @@ public class IntMatrix {
     }
 
     /**
+     * @return The number of elements contained in this matrix.
+     */
+    public int getSize() {
+        return 0;
+    }
+
+    /**
      * @param index Specifies which row to return.
      * @return The row located at index.
      * @throws ArrayIndexOutOfBoundsException Indicates a row does not exist at the given index.
      */
     public int[] getRow(int index) {
-        return null;
+        throw new ArrayIndexOutOfBoundsException();
     }
 
     /**
@@ -88,7 +106,7 @@ public class IntMatrix {
      * @throws ArrayIndexOutOfBoundsException Indicates a column does not exist at the given index.
      */
     public int[] getColumn(int index) {
-        return null;
+        throw new ArrayIndexOutOfBoundsException();
     }
 
     /**
