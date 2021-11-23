@@ -89,5 +89,8 @@ public class IntMatrixTest {
         assertEquals(0, matrix.getElement(1, 2));
     }
 
+    @Test
+    public void test() {
 
+    }
 }
