@@ -36,7 +36,7 @@ public class IntMatrix {
      *                                        specified location.
      */
     public int get(int row, int col) {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
         return element;
@@ -60,7 +60,7 @@ public class IntMatrix {
      * @return The number of rows.
      */
     public int getHeight() {
-        return 0;
+        return matrix.length;
     }
 
     /**
@@ -80,7 +80,10 @@ public class IntMatrix {
      * @throws ArrayIndexOutOfBoundsException Indicates a row does not exist at the given index.
      */
     public int[] getRow(int index) {
-        throw new ArrayIndexOutOfBoundsException();
+        if (getSize() == 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return matrix[index];
     }
 
     /**
@@ -89,7 +92,7 @@ public class IntMatrix {
      * @throws ArrayIndexOutOfBoundsException Indicates a column does not exist at the given index.
      */
     public int[] getColumn(int index) {
-        if (size == 0) {
+        if (getSize() == 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
         int [] col = new int[matrix.length];
@@ -100,17 +103,23 @@ public class IntMatrix {
     }
 
     public void put(int element, int row, int col) {
-        ++size;
         matrix = new int[row + 1][col + 1];
         matrix[row][col] = element;
     }
 
     public void putColumn(int[] column, int cIndex) {
-        ++size;
         int newHeight = column.length;
         matrix = new int[newHeight][1];
         for (int i = 0; i < column.length; ++i) {
             matrix[i][cIndex] = column[i];
+        }
+    }
+
+    public void putRow(int[] row, int rIndex) {
+        int newWidth = row.length;
+        matrix = new int[1][newWidth];
+        for (int i = 0; i < row.length; ++i) {
+            matrix[rIndex][i] = row[i];
         }
     }
 }

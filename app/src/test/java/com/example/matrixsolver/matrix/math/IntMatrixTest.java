@@ -52,26 +52,44 @@ public class IntMatrixTest {
     }
 
     @Test
-    public void puttingElementIncreasesSize() {
+    public void puttingElementInEmptyMatrixIncreasesSize() {
         emptyMatrix.put(0, 0, 0);
         assertEquals(1, emptyMatrix.getSize());
     }
 
     @Test
-    public void getElementAfterPuttingElement() {
+    public void getElementAfterPuttingElementInEmptyMatrix() {
         int element = 0, row = 0, col = 0;
         emptyMatrix.put(element, row, col);
         assertEquals(element, emptyMatrix.get(row, col));
     }
 
     @Test
-    public void getColumnAfterPuttingColumn() {
+    public void getColumnAfterPuttingColumnInEmptyMatrix() {
         int[] column = new int[] {1, 2, 3};
         int cIndex = 0;
         emptyMatrix.putColumn(column, cIndex);
         int[] returnedColumn = emptyMatrix.getColumn(cIndex);
         for (int i = 0; i < column.length; ++i) {
             assertEquals(column[i], returnedColumn[i]);
+        }
+    }
+
+    @Test
+    public void puttingColumnInEmptyMatrixIncreasesHeight() {
+        int[] column = new int[] {1, 2, 3};
+        emptyMatrix.putColumn(column, 0);
+        assertEquals(column.length, emptyMatrix.getHeight());
+    }
+
+    @Test
+    public void getRowAfterPuttingRowInEmptyMatrix() {
+        int[] row = new int[] {1, 2, 3};
+        int rIndex = 0;
+        emptyMatrix.putRow(row, rIndex);
+        int[] returnedRow = emptyMatrix.getRow(rIndex);
+        for (int i = 0; i < row.length; ++i) {
+            assertEquals(row[i], returnedRow[i]);
         }
     }
 
