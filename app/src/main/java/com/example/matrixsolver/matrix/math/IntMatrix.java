@@ -11,31 +11,19 @@ public class IntMatrix {
      * https://en.wikipedia.org/wiki/Matrix_(mathematics)
      */
 
+    int size = 0;
+    int element = 0;
+    int[][] matrix;
+
     /**
      * Initializes an empty matrix.
      */
     public IntMatrix() {
-
+        this(new int[0][0]);
     }
 
-    /**
-     * Initializes a matrix with the given 2d array. Uneven rows / columns will be evened out with
-     * zeros.
-     * @param initialMatrix 2D array which will have its values put into the matrix.
-     * @throws NullPointerException Indicates that the given parameter is null.
-     */
-    public IntMatrix(int[][] initialMatrix) {
-
-    }
-
-    /**
-     * Initializes an n x m zero matrix.
-     * @param n Number of rows.
-     * @param m Number of columns.
-     * @throws IllegalArgumentException Indicates that a given argument is < 0.
-     */
-    public IntMatrix(int n, int m) {
-
+    public IntMatrix(int[][] initMatrix) {
+        matrix = initMatrix;
     }
 
     /**
@@ -48,7 +36,10 @@ public class IntMatrix {
      *                                        specified location.
      */
     public int get(int row, int col) {
-        throw new ArrayIndexOutOfBoundsException();
+        if (size == 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return element;
     }
 
     /**
@@ -56,18 +47,6 @@ public class IntMatrix {
      */
     public int[][] getMatrix() {
         return new int[0][0];
-    }
-
-    /**
-     * Inserts a value at (row, col). The matrix will be expanded and padded with zeros
-     * to fit the new element at the given position.
-     * @param newElement New value to be inserted into matrix.
-     * @param row Specifies the row to place the element.
-     * @param col Specifies the column to place the element.
-     * @throws IllegalArgumentException Indicates that either row or col < 0.
-     */
-    public void put(int newElement, int row, int col) {
-
     }
 
     /**
@@ -88,7 +67,11 @@ public class IntMatrix {
      * @return The number of elements contained in this matrix.
      */
     public int getSize() {
-        return 0;
+        int count = 0;
+        for (int r = 0; r < matrix.length; ++r) {
+            count += matrix[r].length;
+        }
+        return count;
     }
 
     /**
@@ -106,43 +89,28 @@ public class IntMatrix {
      * @throws ArrayIndexOutOfBoundsException Indicates a column does not exist at the given index.
      */
     public int[] getColumn(int index) {
-        throw new ArrayIndexOutOfBoundsException();
+        if (size == 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        int [] col = new int[matrix.length];
+        for (int i = 0; i < col.length; ++i) {
+            col[i] = matrix[i][index];
+        }
+        return col;
     }
 
-    /**
-     * Inserts a row at a given index.
-     * @param row Row to be inserted into the matrix.
-     * @param index Index to insert the row.
-     * @throws ArrayIndexOutOfBoundsException Indicates an invalid index.
-     * @throws NullPointerException Indicates row argument is null.
-     */
-    public void putRow(int[] row, int index) {
-
+    public void put(int element, int row, int col) {
+        ++size;
+        matrix = new int[row + 1][col + 1];
+        matrix[row][col] = element;
     }
 
-    /**
-     * Inserts a column at a given index.
-     * @param column Column to be inserted into the matrix.
-     * @param index Index to insert the column.
-     * @throws ArrayIndexOutOfBoundsException Indicates an invalid index.
-     * @throws NullPointerException Indicates column argument is null.
-     */
-    public void putColumn(int[] column, int index) {
-
-    }
-
-    /**
-     * @param r1 Indicates the row of the submatrix's starting element.
-     * @param c1 Indicates the column of the submatrix's starting element.
-     * @param r2 Indicates the row of the submatrix's ending element.
-     * @param c2 Indicates the column of the submatrix's ending element.
-     * @return A submatrix whose element at (0,0) is the element from this matrix at
-     * (r1,c1) and whose bottom-right-most element is the element from this matrix at
-     * (r2,c2)
-     * @throws ArrayIndexOutOfBoundsException Indicates one of the given parameters exceeds
-     * the size of the matrix or is < 0.
-     */
-    public int[][] getSubmatrix(int r1, int c1, int r2, int c2) {
-        return null;
+    public void putColumn(int[] column, int cIndex) {
+        ++size;
+        int newHeight = column.length;
+        matrix = new int[newHeight][1];
+        for (int i = 0; i < column.length; ++i) {
+            matrix[i][cIndex] = column[i];
+        }
     }
 }
